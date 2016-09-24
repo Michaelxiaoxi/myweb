@@ -1,6 +1,7 @@
 var http = require('https');
 var cheerio = require('cheerio');
 var url = 'https://movie.douban.com/top250?start=0';
+var start=0;
 
 function fliterhtml(html){
     var $ = cheerio.load(html);
@@ -21,7 +22,6 @@ function fliterhtml(html){
 }
 
 function printanwsinfo(anws){
-    console.log("\n\n----------------豆瓣TOP 250 榜单-------------------");
     var i=1;
     anws.forEach(function(item){
         var stitle = item.stitle;
@@ -29,17 +29,26 @@ function printanwsinfo(anws){
             console.log(stitle);
         i++
     })
+    start += 25;
+    if(start<250)
+    {
+        url = 'https://movie.douban.com/top250?start=' + start;
+        again();
+    }
 }
 
-http.get(url,function(res){
-    var html = '';
-    res.on('data',function(data){
-        html += data;
+function again() {
+    http.get(url, function (res) {
+        var html = '';
+        res.on('data', function (data) {
+            html += data;
+        })
+        res.on('end', function () {
+            var anws = fliterhtml(html);
+            printanwsinfo(anws);
+        })
+    }).on('error', function () {
+        console.log('error!!!')
     })
-    res.on('end',function(){
-        var anws =  fliterhtml(html);
-        printanwsinfo(anws);
-    })
-}).on('error',function(){
-    console.log('error!!!')
-})
+}
+again();
