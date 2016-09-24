@@ -1,15 +1,17 @@
+//2516.09.24  人生的第一个爬虫。 以后回来优化。
 var http = require('https');
 var cheerio = require('cheerio');
 var url = 'https://movie.douban.com/top250?start=0';
-var start=0;
+var start= 0, i=1;
 
+console.log("---------豆瓣TOP 250 榜单 by 小喜-------------");
 function fliterhtml(html){
     var $ = cheerio.load(html);
     var stars = $('.item');
     var anws =[];
     stars.each(function(item){
         var star = $(this);
-        var stitle = star.find('.title').text();
+        var stitle = star.find('.title').text().split('/')[0];
         var fen = star.find('.rating_num').text();
         var stitleData = {
             stitle : stitle,
@@ -22,11 +24,11 @@ function fliterhtml(html){
 }
 
 function printanwsinfo(anws){
-    var i=1;
+
     anws.forEach(function(item){
         var stitle = item.stitle;
         var fen = item.fen;
-            console.log(stitle);
+            console.log(i+" "+stitle);
         i++
     })
     start += 25;
