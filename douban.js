@@ -11,11 +11,13 @@ function fliterhtml(html){
     var anws =[];
     stars.each(function(item){
         var star = $(this);
-        var stitle = star.find('.title').text().split('/')[0];
+        var stitle = star.find('.title').text().split('/')[0]
         var fen = star.find('.rating_num').text();
+        var inq = star.find('.inq').text();
         var stitleData = {
             stitle : stitle,
-            fen:fen
+            fen:fen,
+            inq:inq
         }
 
         anws.push(stitleData);
@@ -28,7 +30,8 @@ function printanwsinfo(anws){
     anws.forEach(function(item){
         var stitle = item.stitle;
         var fen = item.fen;
-            console.log(i+" "+stitle);
+        var inq =item.inq;
+            console.log(i+" "+stitle+"  \n\t\t--"+inq);
         i++
     })
     start += 25;
