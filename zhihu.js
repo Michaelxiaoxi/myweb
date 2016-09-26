@@ -1,11 +1,11 @@
 // 抓取知乎收藏夹的问题列表
-var http = require('http');
+var http = require('https');
 var cheerio = require('cheerio');
-var url = 'http://www.zhihu.com/collection/69154204';
-var totalpage = 6;
+var url = 'https://www.zhihu.com/collection/20539068';
+var totalpage = 4;
 var page = 1;
 var i = 1;
-
+var starnum = url.split('collection/')[1];
 function fliterhtml(html){
     var $ = cheerio.load(html);
     var stars = $('.zm-item');
@@ -35,7 +35,7 @@ function printanwsinfo(anws){
     })
     page++;
     if(page<=totalpage){
-        url = "http://www.zhihu.com/collection/69154204?page="+page;
+        url = "https://www.zhihu.com/collection/"+starnum+"?page="+page;
         again();
     }else {
         console.log("\n抓取完毕！")
