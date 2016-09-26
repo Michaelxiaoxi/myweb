@@ -1,4 +1,5 @@
 //2516.09.24  人生的第一个爬虫。 以后回来优化。
+// npm install cheerio
 var http = require('https');
 var cheerio = require('cheerio');
 var url = 'https://movie.douban.com/top250?start=0';
