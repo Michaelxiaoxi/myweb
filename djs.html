@@ -22,18 +22,14 @@
     var lutime = new Date("2016,10,12 12:00:00");
     var aftime = new Date("2016,10,12 13:30:00");
     var nttime = new Date("2016,10,12 18:00:00")
-    window.onload = function(){
+     window.onload = function(){
         setInterval(function(){
             showTime(lutime,"中午下班","times1");
-        },20);
-        setInterval(function(){
             showTime(aftime,"下午上班","times2");
-        });
-        setInterval(function(){
-            showTime(nttime,"最后下班","times3")
-        })
+            showTime(nttime,"最后下班","times3");
+        },20);
     }
-
+     
     function cltime(i){
         if(i<10){
             i = "0" + i;
