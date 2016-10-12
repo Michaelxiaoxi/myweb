@@ -19,8 +19,9 @@
 
     window.onload = function(){
         setInterval(function(){
-            var m = showTime(lutime);
-            document.getElementById("times").innerHTML=m;},20)
+            var h, m ,s= showTime(lutime);
+            document.getElementById("times").innerHTML=m;
+        },20)
     }
 
     function cltime(i){
