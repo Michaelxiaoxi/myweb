@@ -3,25 +3,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <title>下班！</title>
     <style>
-        *{font-size: 28px;color: green;font-family: "microsoft yahei";}
+        *{font-size: 24px;color: green;font-family: "microsoft yahei";}
         span{color:red;}
         em{font-size: 18px; color: #00A4CF;}
+        .title{margin-left: 100px; color:#8058D0;}
     </style>
 </head>
 <body>
-
-<div id="times"></div>
+<div class="title">小喵时间表</div><br>
+<div id="times1"></div>
+<div id="times2"></div>
+<div id="times3"></div>
 
 <script type="text/javascript">
     var lutime = new Date("2016,10,12 12:00:00");
-
+    var aftime = new Date("2016,10,12 13:30:00");
+    var nttime = new Date("2016,10,12 18:00:00")
     window.onload = function(){
         setInterval(function(){
-            var h, m ,s= showTime(lutime);
-            document.getElementById("times").innerHTML=m;
-        },20)
+            showTime(lutime,"中午下班","times1");
+        },20);
+        setInterval(function(){
+            showTime(aftime,"下午上班","times2");
+        });
+        setInterval(function(){
+            showTime(nttime,"最后下班","times3")
+        })
     }
 
     function cltime(i){
@@ -31,7 +41,7 @@
         return i;
     }
 
-    function showTime(endtime){
+    function showTime(endtime,tips,id){
         var nowtime = new Date();
         var lefttime = parseInt((endtime.getTime()-nowtime.getTime())/1000);
         //var d = parseInt(lefttime/(24*60*60));
@@ -42,9 +52,9 @@
         h = cltime(h);
         m = cltime(m);
         s = cltime(s);
-        return h,m,s;
+        document.getElementById(id).innerHTML = "距离"+tips+"：  <span>"+h+":"+m+":"+s+" <em> "+ms+"</em></span><br><br>";
         if(lefttime<=0){
-            document.getElementById("times").innerHTML = "下班了!!";
+            document.getElementById("times").innerHTML = tips ;
         }
 
         //setTimeout(showTime(),20);
