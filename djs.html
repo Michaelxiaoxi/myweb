@@ -20,9 +20,7 @@
     window.onload = function(){
         setInterval(function(){
             showTime(lutime);
-            var m = showTime(lutime);
-            document.getElementById("times").innerHTML=m;
-        },20)
+            document.getElementById("times").innerHTML=m;},20)
     }
 
     function cltime(i){
@@ -43,8 +41,8 @@
         h = cltime(h);
         m = cltime(m);
         s = cltime(s);
-        return m;
-
+        return h,m,s;
+        if(lefttime<=0){
             document.getElementById("times").innerHTML = "下班了!!";
         }
 
